@@ -1,6 +1,6 @@
 {
   "name": "@corva/node-sdk",
-  "version": "8.1.0-rc.9",
+  "version": "8.1.0-rc.10",
   "description": "Node.js SDK to build corva.ai apps",
   "keywords": [
     "lambda"
