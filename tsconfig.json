@@ -1,0 +1,50 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "include": [
+    "lib/**/*.ts",
+    "__tests__",
+    "examples"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "strict": false,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@corva/node-sdk": ["lib/"]
+    }
+  },
+  "typeAcquisition": {
+    "enable": true
+  },
+  "typedocOptions": {
+    "out": "docs",
+    "includeVersion": true,
+    "internalModule": "library",
+    "excludeExternals": true,
+    "excludeInternal": true,
+    "readme": "README.md",
+    "disableSources": true,
+    "exclude": [
+      "**/*.spec.ts",
+      "__tests__/**/*",
+      "node_modules/**/*",
+      "**/*.js",
+      "coverage/**/*"
+    ],
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "includes": "examples",
+    "hideGenerator": true
+  }
+}

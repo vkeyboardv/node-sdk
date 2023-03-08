@@ -1,0 +1,23 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+.aws-sam
+
+**/*.xxx.*
+.env
+*.zip
+config/local*
+coverage
+test-results
+.idea
+*.tgz
+
+.DS_Store
+lib/**/*.js
+lib/**/*.d.ts
+
+dist
+docs

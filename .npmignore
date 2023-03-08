@@ -1,0 +1,6 @@
+*.*
+!lib/**/*.js
+!lib/**/*.lua
+!lib/**/*.json
+!lib/**/*.d.ts
+!types/**/*.d.ts

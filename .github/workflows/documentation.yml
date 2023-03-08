@@ -1,0 +1,43 @@
+on:
+  push:
+    tags:
+      - v*.*.[0-9]+
+
+name: documentation
+
+jobs:
+  docs:
+    name: Build and publish docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+          cache: npm
+
+      - name: Install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CORVA_NPMJS_PUBLIC_TOKEN }}
+        run: npm ci
+
+      - name: Extract branch
+        id: branch
+        shell: bash
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      - name: Generate documentation
+        run: npm run typedoc
+
+      - name: Deploy to github pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs
+          target-folder: docs/${{ steps.branch.outputs.short_ref }}
+          clean: true

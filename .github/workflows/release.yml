@@ -1,0 +1,103 @@
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+name: release
+
+jobs:
+  release:
+    name: Create release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 50
+
+      - name: Git fetch tags
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+      
+      - name: Git fetch prune
+        run: git fetch --prune --unshallow
+
+      - name: Setup node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+          cache: npm
+
+      - name: Install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CORVA_NPMJS_PUBLIC_TOKEN }}
+        run: npm ci
+
+      - name: Run get-changelog
+        run: npm run get-changelog | tail -n +2
+
+      - name: Get latest changelog
+        id: Changelog
+        run: |
+          changelog=$(npm run --silent get-changelog | tail -n +2)
+          echo $changelog
+          changelog="${changelog//'%'/'%25'}"
+          changelog="${changelog//$'\n'/'%0A'}"
+          changelog="${changelog//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$changelog"
+
+      - name: Get release type
+        id: release_type
+        run: |
+          PRERELEASE=$([[ ${{ github.ref }} == *"-rc"* ]] && echo true || echo false)
+          echo "::set-output name=prerelease::$PRERELEASE"
+
+      - name: Create github release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ${{ steps.Changelog.outputs.changelog }}
+          draft: false
+          prerelease: ${{ steps.release_type.outputs.prerelease }}
+
+  publish-gh:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+          cache: npm
+
+      - name: Install dependencies
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CORVA_NPMJS_PUBLIC_TOKEN }}
+        run: npm ci
+
+      - name: Run build
+        run: npm run build --if-present
+
+      - name: Get npm tag
+        id: npm_tag
+        run: |
+          NPM_TAG=$([[ ${{ github.ref }} == *"-rc"* ]] && echo "next" || echo "latest")
+          echo "::set-output name=tag::$NPM_TAG"
+
+      - name: Omit changelog
+        run: rm CHANGELOG.md
+
+      - name: Publish to npm
+        run: npm publish --tag ${{ steps.npm_tag.outputs.tag }} --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CORVA_NPMJS_PUBLIC_TOKEN }}

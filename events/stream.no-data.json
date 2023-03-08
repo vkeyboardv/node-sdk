@@ -1,0 +1,110 @@
+[
+  {
+    "metadata": {
+      "apps": {
+        "corva.wits-depth-summary": {
+          "app_connection_id": 864853
+        },
+        "corva.well-control": {
+          "app_connection_id": 864852
+        },
+        "corva.trend-analysis": {
+          "app_connection_id": 864851
+        },
+        "corva.activity-summary": {
+          "app_connection_id": 864850
+        },
+        "corva.engineering-base": {
+          "app_connection_id": 864849
+        }
+      },
+      "app_stream_id": 35197,
+      "source_type": "drilling",
+      "log_type": "time"
+    },
+    "records": [
+      {
+        "timestamp": 1521699052,
+        "asset_id": 11877520,
+        "company_id": 81,
+        "version": 1,
+        "data": null,
+        "provider": "corva",
+        "collection": "wits.completed",
+        "app": "corva.wits-historical-import"
+      }
+    ]
+  },
+  {
+    "metadata": {
+      "apps": {
+        "corva.wits-depth-summary": {
+          "app_connection_id": 864853
+        },
+        "corva.well-control": {
+          "app_connection_id": 864852
+        },
+        "corva.trend-analysis": {
+          "app_connection_id": 864851
+        },
+        "corva.activity-summary": {
+          "app_connection_id": 864850
+        },
+        "corva.engineering-base": {
+          "app_connection_id": 864849
+        }
+      },
+      "app_stream_id": 35197,
+      "source_type": "drilling",
+      "log_type": "time"
+    },
+    "records": [
+      {
+        "timestamp": 1521699052,
+        "asset_id": 11877520,
+        "company_id": 81,
+        "version": 1,
+        "data": null,
+        "provider": "corva",
+        "collection": "wits.completed",
+        "app": "corva.wits-historical-import"
+      }
+    ]
+  },
+  {
+    "metadata": {
+      "apps": {
+        "corva.wits-depth-summary": {
+          "app_connection_id": 864853
+        },
+        "corva.well-control": {
+          "app_connection_id": 864852
+        },
+        "corva.trend-analysis": {
+          "app_connection_id": 864851
+        },
+        "corva.activity-summary": {
+          "app_connection_id": 864850
+        },
+        "corva.engineering-base": {
+          "app_connection_id": 864849
+        }
+      },
+      "app_stream_id": 35197,
+      "source_type": "drilling",
+      "log_type": "time"
+    },
+    "records": [
+      {
+        "timestamp": 1521699052,
+        "asset_id": 11877520,
+        "company_id": 81,
+        "version": 1,
+        "data": null,
+        "provider": "corva",
+        "collection": "wits.completed",
+        "app": "corva.wits-historical-import"
+      }
+    ]
+  }
+]
