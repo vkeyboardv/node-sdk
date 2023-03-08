@@ -1,7 +1,0 @@
-{
-  "issueUrlFormat": "https://corvaqa.atlassian.net/browse/{{id}}",
-  "scripts": {
-    "postbump": "./bin/replace-version-readme.sh README.md && git add README.md",
-    "posttag": "git push --follow-tags"
-  }
-}
