@@ -57,9 +57,9 @@ For details on the app types, see [App types](#app-types).
 
 There are the following app types that you can build:
 
-- [Stream](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/classes/Corva.html#stream) - works with real-time data;
-- [Scheduled](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/classes/Corva.html#scheduled) - works with data at defined schedules/intervals (e.g., once a minute, once every three ft.);
-- [Task](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/classes/Corva.html#task) - works with data on-demand.
+- [Stream](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/classes/Corva.html#stream) - works with real-time data;
+- [Scheduled](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/classes/Corva.html#scheduled) - works with data at defined schedules/intervals (e.g., once a minute, once every three ft.);
+- [Task](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/classes/Corva.html#task) - works with data on-demand.
 
 ### Followable apps
 
@@ -67,8 +67,8 @@ Stream & scheduled apps can be followed. Followable apps must produce data to tr
 
 There are the following possible ways to make the app produce the data:
 
-- Make a separate call to API specifying only indexes. See [`CorvaDataSource.produceMessages`](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/classes/library.CorvaDataSource.html#produceMessages) for details.
-- Produce the data while saving. See [`Dataset.createEntriesAndProduceMessages`](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/classes/Dataset.html#createEntriesAndProduceMessages) for details
+- Make a separate call to API specifying only indexes. See [`CorvaDataSource.produceMessages`](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/classes/library.CorvaDataSource.html#produceMessages) for details.
+- Produce the data while saving. See [`Dataset.createEntriesAndProduceMessages`](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/classes/Dataset.html#createEntriesAndProduceMessages) for details
 
 ## Writing a handler
 
@@ -88,14 +88,14 @@ const handler = (event, context) => {
 
 There are following types of events that match the related [app types](#app-types):
 
-- [Scheduled event](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/interfaces/library.BaseScheduledLambdaEvent.html) - contains info about current invocation interval;
-- [Stream event](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/interfaces/StreamLambdaEvent) - contains [records](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/interfaces/StreamLambdaEvent#records) that have been published since the last app invoke;
-- [Task](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/interfaces/Task) - a task with which the app was invoked, which contains passed [parameters](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/interfaces/Task#properties).
+- [Scheduled event](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/interfaces/library.BaseScheduledLambdaEvent.html) - contains info about current invocation interval;
+- [Stream event](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/interfaces/StreamLambdaEvent) - contains [records](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/interfaces/StreamLambdaEvent#records) that have been published since the last app invoke;
+- [Task](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/interfaces/Task) - a task with which the app was invoked, which contains passed [parameters](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/interfaces/Task#properties).
 
 ### Context
 Context provides the next functionality:
-- `cache` - convenient methods to work with the state; see [State class](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/classes/library.State). Not available for task apps;
-- `api` - helper to interact with Corva API (and make any other generic request as well); see [Api](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/classes/library.CorvaDataSource);
-- `logger` - [Logger](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/classes/CorvaLogger) instance;
-`secrets` - the application's sensitive data (see [DevCenter docs](https://app.qa.corva.ai/dev-center/docs/backend/secrets), [usage example](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.15/interfaces/HandlerContext.html#secrets), [testing](https://www.npmjs.com/package/@corva/local-testing-framework#app-secrets));
+- `cache` - convenient methods to work with the state; see [State class](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/classes/library.State). Not available for task apps;
+- `api` - helper to interact with Corva API (and make any other generic request as well); see [Api](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/classes/library.CorvaDataSource);
+- `logger` - [Logger](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/classes/CorvaLogger) instance;
+`secrets` - the application's sensitive data (see [DevCenter docs](https://app.qa.corva.ai/dev-center/docs/backend/secrets), [usage example](https://corva-ai.github.io/node-sdk/docs/v8.1.0-rc.16/interfaces/HandlerContext.html#secrets), [testing](https://www.npmjs.com/package/@corva/local-testing-framework#app-secrets));
 - `config` - some basic info about app invoke.
